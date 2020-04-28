@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh_CN"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+
+<body>
+    <h1>INDEX</h1>
+    <p>欢迎回来,
+        <font style="color:deeppink" th:if="${user.usertype}=='admin'">管理员 </font>
+        <font style="color:blue">[[${session.loginUser}]]</font>。
+        您的积分：
+        <font style="color:red">[[${user.credit}]]</font>
+    </p>
+    <form class="form-signin" action="login.html" th:action="@{/logout}">
+        <button type="submit">log out</button>
+    </form>
+</body>
+</html>

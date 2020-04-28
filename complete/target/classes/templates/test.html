@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" type="text/css" media="all" href="css/style.css" th:href="@{/css/style.css}"/>
+    <script type="text/javascript" src="js/thymeleaf.js" th:src="@{/js/thymeleaf.js}"></script>
+
+    <style>
+        h2{
+            text-decoration: underline;
+            font-size:0.9em;
+            color:gray;
+        }
+    </style>
+</head>
+<body>
+
+<div class="showing">
+    <h2>显示 转义和非转义的 html 文本</h2>
+    <p th:text="${htmlContent}" ></p>
+    <p th:utext="${htmlContent}" ></p>
+</div>
+
+<div class="showing">
+    <h2>显示对象以及对象属性</h2>
+    <p th:text="${currentProduct}" ></p>
+    <p th:text="${currentProduct.name}" ></p>
+    <p th:text="${currentProduct.getName()}" ></p>
+</div>
+
+<div class="showing" th:object="${currentProduct}">
+    <h2>*{}方式显示属性</h2>
+    <p th:text="*{name}" ></p>
+</div>
+
+<div class="showing">
+    <h2>算数运算</h2>
+    <p th:text="${currentProduct.price+999}" ></p>
+</div>
+
+</body>
+
+</html>
