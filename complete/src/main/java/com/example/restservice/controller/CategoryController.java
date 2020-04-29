@@ -20,6 +20,7 @@ public class CategoryController {
     @Autowired CategoryMapper categoryMapper;
 
     @RequestMapping("/addCategory")
+    // 这里入参Category是SpringMVC自动帮忙封装好的，要求的是属性名和请求参数名一一对应。可以<xxx name="xxx">来标定参数名字
     public String listCategory(Category c) throws Exception {
         categoryMapper.save(c);
         return "redirect:listCategory";

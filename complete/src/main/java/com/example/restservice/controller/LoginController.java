@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.constraints.Null;
 import java.util.Map;
 
 @Controller
@@ -21,27 +22,38 @@ public class LoginController {
     @PostMapping(value = "/login")
     public String login(@RequestParam("username") String username,
                         @RequestParam("password") String password,
-                        Map<String,Object> map, HttpSession session){
+                        HttpSession session){
 
         String password_T = passwordMapper.getPassword(username);
+
+        if(password_T == null){
+//            System.out.println("usernameNotExist");
+            session.setAttribute("loginMsg", "signInFailed");
+            return  "redirect:/login";
+        }
 
         if(!StringUtils.isEmpty(username) && password_T.equals(password)){
             //登陆成功，防止表单重复提交，可以重定向到主页
             session.setAttribute("loginUser",username);
-            return "redirect:/index";
+            session.setAttribute("loginMsg", "");
+//            map.put("msg", "");
+            return "redirect:/";
         }else{
             //登陆失败
-            map.put("msg","用户名密码错误");
+//            map.put("msg", "用户名密码错误");
+//            System.out.println("signInFailed");
+            session.setAttribute("loginMsg", "signInFailed");
             return  "login";
         }
     }
 
-//    @GetMapping("/")
-//    public String entry(){
-//        return "index";
-//    }
+    @GetMapping("/")
+    public String preIndex(HttpSession session, Model m){
+        session.setAttribute("actionMsg","");
+        return "redirect:/index";
+    }
 
-    @GetMapping({"/index", "/"})
+    @GetMapping("/index")
     public String index(HttpSession session, Model m){
 //        System.out.print(session.getAttribute("loginUser").toString());
         User user = userMapper.getUser(session.getAttribute("loginUser").toString());

@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>list</title>
+</head>
+<body>
+
+
+  
+<div style="width:500px;margin:20px auto;text-align: center">
+    <table align='center' border='1' cellspacing='0'>
+        <tr>
+            <td>动作id</td>
+            <td>用户名</td>
+            <td>动作</td>
+            <td>时间</td>
+            <td>积分变化</td>
+            <td>备注</td>
+        </tr>
+        <tr th:each="ua:${userActionPage.list}">
+            <td th:text="${ua.actionid}"></td>
+            <td th:text="${ua.username}"></td>
+            <td th:text="${ua.actionname}"></td>
+            <td th:text="${ua.actiontime}"></td>
+            <td><font th:if="${ua.creditchange} > 0">+</font>[[${ua.creditchange}]]</td>
+            <td th:text="${ua.actiondetail}"></td>
+
+            <!--<td><a th:href="@{/editCategory(id=${c.id})}">编辑</a></td>-->
+            <!--<td><a th:href="@{/deleteCategory(id=${c.id})}">删除</a></td>-->
+        <!--</tr>-->
+    </table>
+
+    <br/>
+    <div>
+            <a th:href="@{/}">返回主页 </a>
+			<a th:href="@{/listAction(start=0)}">[首  页]</a>
+			<a th:href="@{/listAction(start=${userActionPage.pageNum-1})}">[上一页]</a>
+			<a th:href="@{/listAction(start=${userActionPage.pageNum+1})}">[下一页]</a>
+			<a th:href="@{/listAction(start=${userActionPage.pages})}">[末  页]</a>
+    </div>
+    <br/>
+
+</div>
+
+</body>
+</html>

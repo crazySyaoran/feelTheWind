@@ -17,7 +17,9 @@
 			<h2 class="h2 mb-3 font-weight-normal">Feel the Wind</h2>
             <!--<h4 class="h4 mb-3 font-weight-normal">登录</h4>-->
 			<!--判断-->
-			<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+			<!--<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>-->
+            <!--<p th:text="${loginMsg}"></p>-->
+            <p style="color: red" th:if="${session.loginMsg}=='signInFailed'">用户名密码错误</p>
 			<label class="sr-only" th:text="#{login.username}">Username</label>
 			<input type="text"  name="username" class="form-control" placeholder="Username"  required="" autofocus="">
 			<label class="sr-only" th:text="#{login.password}">Password</label>

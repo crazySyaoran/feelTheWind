@@ -9,12 +9,21 @@
     <h1>INDEX</h1>
     <p>欢迎回来,
         <font style="color:deeppink" th:if="${user.usertype}=='admin'">管理员 </font>
-        <font style="color:blue">[[${session.loginUser}]]</font>。
-        您的积分：
-        <font style="color:red">[[${user.credit}]]</font>
+        <a th:href="@{/listAction}"><font style="color:blue">[[${session.loginUser}]]</font></a>
+        <a th:href="@{/logout}">[登出]</a>。  积分：
+        <font style="color:green">[[${user.credit}]]</font>
+
+        <font style="color:red" th:if="${session.actionMsg=='success'}">    [打卡成功！] </font>
     </p>
-    <form class="form-signin" action="login.html" th:action="@{/logout}">
-        <button type="submit">log out</button>
-    </form>
+
+    <!--<form class="form-signin" action="login.html" th:action="@{/logout}">-->
+        <!--<button type="submit">log out</button>-->
+    <!--</form>-->
+
+    <a th:href="@{/meal}">恰饭</a>
+    <a th:href="@{/sleep}">睡觉</a>
+    <a th:href="@{/getup}">起床</a>
+
+
 </body>
 </html>
