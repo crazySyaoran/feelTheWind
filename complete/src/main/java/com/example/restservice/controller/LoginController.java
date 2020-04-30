@@ -27,7 +27,6 @@ public class LoginController {
         String password_T = passwordMapper.getPassword(username);
 
         if(password_T == null){
-//            System.out.println("usernameNotExist");
             session.setAttribute("loginMsg", "signInFailed");
             return  "redirect:/login";
         }
@@ -36,6 +35,8 @@ public class LoginController {
             //登陆成功，防止表单重复提交，可以重定向到主页
             session.setAttribute("loginUser",username);
             session.setAttribute("loginMsg", "");
+            session.setAttribute("signupMsg","");
+
 //            map.put("msg", "");
             return "redirect:/";
         }else{
@@ -43,13 +44,16 @@ public class LoginController {
 //            map.put("msg", "用户名密码错误");
 //            System.out.println("signInFailed");
             session.setAttribute("loginMsg", "signInFailed");
-            return  "login";
+            return  "redirect:/login";
         }
     }
 
     @GetMapping("/")
     public String preIndex(HttpSession session, Model m){
         session.setAttribute("actionMsg","");
+        session.setAttribute("signupMsg","");
+        session.setAttribute("loginMsg","");
+
         return "redirect:/index";
     }
 
@@ -66,7 +70,7 @@ public class LoginController {
     }
 
     @GetMapping("/login")
-    public String login(){
+    public String login(HttpSession session){
         return "login";
     }
 
@@ -74,7 +78,7 @@ public class LoginController {
     public String logout(HttpSession session){
         session.removeAttribute("loginUser");
 //        System.out.println(session.getAttribute("loginUser"));
-        return "redirect:login";
+        return "redirect:/";
     }
 
 

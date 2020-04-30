@@ -23,7 +23,8 @@ public class MyMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(new LoginHandlerInterceptor())
 //                .addPathPatterns("/index", "/listCategory")
                 .addPathPatterns("/*")
-                .excludePathPatterns("/login");
+                .excludePathPatterns("/login")
+                .excludePathPatterns("/signup");
 //                .excludePathPatterns("/");
     }
 

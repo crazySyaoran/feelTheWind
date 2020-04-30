@@ -2,6 +2,8 @@
 <html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link href="../asserts/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.css}" rel="stylesheet">
+    <!--<link href="../asserts/css/signin.css" th:href="@{/asserts/css/signin.css}" rel="stylesheet">-->
     <title>list</title>
 </head>
 <body>
@@ -9,22 +11,26 @@
 
   
 <div style="width:500px;margin:20px auto;text-align: center">
-    <table align='center' border='1' cellspacing='0'>
+    <table align='center' border='1' cellspacing='0' class="table table-striped">
+        <thead class="thead-dark">
         <tr>
-            <td>动作id</td>
-            <td>用户名</td>
-            <td>动作</td>
-            <td>时间</td>
-            <td>积分变化</td>
-            <td>备注</td>
+            <td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;">动作id</td>
+            <td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;">用户名</td>
+            <td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;">动作</td>
+            <td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;">时间</td>
+            <td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;">积分变化</td>
+            <td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;">备注</td>
         </tr>
+        </thead>
+        <tbody>
         <tr th:each="ua:${userActionPage.list}">
             <td th:text="${ua.actionid}"></td>
             <td th:text="${ua.username}"></td>
             <td th:text="${ua.actionname}"></td>
-            <td th:text="${ua.actiontime}"></td>
+            <td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;" th:text="${ua.actiontime}"></td>
             <td><font th:if="${ua.creditchange} > 0">+</font>[[${ua.creditchange}]]</td>
-            <td th:text="${ua.actiondetail}"></td>
+            <td th:text="${ua.actiondetail}"></td></tr>
+        </tbody>
 
             <!--<td><a th:href="@{/editCategory(id=${c.id})}">编辑</a></td>-->
             <!--<td><a th:href="@{/deleteCategory(id=${c.id})}">删除</a></td>-->

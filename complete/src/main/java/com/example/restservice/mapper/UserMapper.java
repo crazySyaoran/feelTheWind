@@ -16,4 +16,12 @@ public interface UserMapper {
     @Select("select username, usertype, credit from user_ where username= #{username} ")
     User getUser(String username);
 
+//    @Insert("insert into action_ ( username, actionname, actiontime, creditchange, actiondetail ) " +
+//            "values ( #{username}, #{actionname}, #{actiontime}, #{creditchange}, #{actiondetail} ) ")
+//    int save(UserAction userAction);
+
+    @Insert("insert into user_ ( username, password, usertype, credit, email ) " +
+            "values ( #{username}, #{password}, #{usertype}, #{credit}, #{email} )")
+    int addUser(User user);
+
 }

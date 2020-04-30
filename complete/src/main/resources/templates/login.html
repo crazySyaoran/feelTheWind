@@ -14,23 +14,25 @@
 	<body class="text-center">
 		<form class="form-signin" action="index.html" th:action="@{/login}" method="post">
 			<!--<img class="mb-4" th:src="@{/asserts/img/bootstrap-solid.svg}" src="asserts/img/bootstrap-solid.svg" alt="" width="72" height="72">-->
-			<h2 class="h2 mb-3 font-weight-normal">Feel the Wind</h2>
+			<h2 class="h2 mb-5 font-weight-normal mt-3">Feel the Wind</h2>
             <!--<h4 class="h4 mb-3 font-weight-normal">登录</h4>-->
 			<!--判断-->
 			<!--<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>-->
             <!--<p th:text="${loginMsg}"></p>-->
+            <!--<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>-->
             <p style="color: red" th:if="${session.loginMsg}=='signInFailed'">用户名密码错误</p>
-			<label class="sr-only" th:text="#{login.username}">Username</label>
-			<input type="text"  name="username" class="form-control" placeholder="Username"  required="" autofocus="">
-			<label class="sr-only" th:text="#{login.password}">Password</label>
-			<input type="password" name="password" class="form-control" placeholder="Password"  required="">
+            <p style="color: red" th:if="${session.signupMsg}=='success'">注册成功</p>
+			<label class="sr-only" th:text="#{login.username}">用户名</label>
+			<input type="text"  name="username" class="form-control" placeholder="用户名"  required="" autofocus="">
+			<label class="sr-only" th:text="#{login.password}">密码</label>
+			<input type="password" name="password" class="form-control" placeholder="密码"  required="">
 			<!--<div class="checkbox mb-3">-->
 				<!--<label>-->
           			<!--<input type="checkbox" value="remember-me"/> [[#{login.remember}]]-->
         		<!--</label>-->
 			<!--</div>-->
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-			<p class="mt-5 mb-3 text-muted">© 2020-2021</p>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+			<p class="mt-5 mb-3 text-muted"><a th:href="@{/signup}" class="mt-5 mb-3 text-muted">注册</a></p>
 			<!--<a class="btn btn-sm" th:href="@{/index.html(l='zh_CN')}">中文</a>-->
 			<!--<a class="btn btn-sm" th:href="@{/index.html(l='en_US')}">English</a>-->
 		</form>
