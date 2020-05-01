@@ -117,6 +117,11 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>
+						com.example.restservice.RestServiceApplication
+					</mainClass>
+				</configuration>
 			</plugin>
 
 		</plugins>
