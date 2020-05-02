@@ -2,7 +2,6 @@ package com.example.restservice.mapper;
 
 import java.util.List;
 
-import com.example.restservice.pojo.Category;
 import com.example.restservice.pojo.User;
 
 import org.apache.ibatis.annotations.Delete;

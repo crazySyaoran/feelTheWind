@@ -47,8 +47,9 @@ public class ActionController {
         String mealtype = hournow<10?"breakfast" : hournow>15?"supper" : "lunch";
 
         UserAction meal = new UserAction(session.getAttribute("loginUser").toString(),
-                mealtype,(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss")).format(date),
+                mealtype,(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(date),
                 1,"");
+
         actionMapper.save(meal);
         session.setAttribute("actionMsg", "success");
 
@@ -59,7 +60,7 @@ public class ActionController {
     public String sleepAction(HttpSession session) throws Exception{
 
         UserAction sleep = new UserAction(session.getAttribute("loginUser").toString(),
-                "sleep",(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss")).format(new Date()),
+                "sleep",(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date()),
                 -1,"");
         actionMapper.save(sleep);
         session.setAttribute("actionMsg", "success");
@@ -71,7 +72,7 @@ public class ActionController {
     public String getUpAction(HttpSession session) throws Exception{
 
         UserAction getup = new UserAction(session.getAttribute("loginUser").toString(),
-                "getup",(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss")).format(new Date()),
+                "getup",(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date()),
                 -1,"");
         actionMapper.save(getup);
         session.setAttribute("actionMsg", "success");

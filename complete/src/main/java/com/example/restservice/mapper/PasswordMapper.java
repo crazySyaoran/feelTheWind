@@ -9,8 +9,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import com.example.restservice.pojo.Category;
-
 @Mapper
 public interface PasswordMapper {
     // Deprecated
