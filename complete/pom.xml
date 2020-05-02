@@ -121,8 +121,11 @@
 					<mainClass>
 						com.example.restservice.RestServiceApplication
 					</mainClass>
+                    <executable>true</executable>
 				</configuration>
 			</plugin>
+
+
 
 		</plugins>
 	</build>
