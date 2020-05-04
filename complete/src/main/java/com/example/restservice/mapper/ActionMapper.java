@@ -16,7 +16,12 @@ public interface ActionMapper {
             "values ( #{username}, #{actionname}, #{actiontime}, #{creditchange}, #{actiondetail} ) ")
     int save(UserAction userAction);
 
-    @Select("select * from action_ where username= #{username} ")
+    @Select("select * from action_ where username = #{username} ")
     List<UserAction> getUserAction(String username);
+
+//    @Select("select actionid from action_ where actionname = #{actionname} and left(actiontime,10) = #{actiontime}")
+    @Select("select actionid from action_ where actionname = #{actionname} and left(actiontime,10) = #{actiontime} " +
+            "and username = #{username}")
+    List<String> actedAction(UserAction actedUA);
 
 }

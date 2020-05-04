@@ -32,8 +32,8 @@
                 </div>
             </li>
 
-            <li class="nav-item active">
-                <a class="nav-link" th:href="@{/listAction}">打卡记录<span class="sr-only">(current)</span></a>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/listAction}">打卡记录</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link">我的账号</a>
@@ -51,11 +51,6 @@
 
         </ul>
 
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-
     </div>
 </nav>
   
@@ -65,20 +60,20 @@
         <tr>
             <!--<td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;">动作id</td>-->
             <!--<td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;">用户名</td>-->
-            <td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;">动作</td>
-            <td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;">时间</td>
-            <td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;">活力值 变化</td>
-            <td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;">备注</td>
+            <td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;">排名</td>
+            <td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;">用户名</td>
+            <td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;">活力值</td>
+            <!--<td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;">金币</td>-->
         </tr>
         </thead>
         <tbody>
-        <tr th:each="ua:${userActionPage.list}">
+        <tr th:each="ur:${userRankPage.list}">
             <!--<td th:text="${ua.actionid}"></td>-->
             <!--<td th:text="${ua.username}"></td>-->
-            <td th:text="${ua.actionname}"></td>
-            <td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;" th:text="${ua.actiontime}"></td>
-            <td><font th:if="${ua.creditchange} > 0">+</font>[[${ua.creditchange}]]</td>
-            <td th:text="${ua.actiondetail}"></td></tr>
+            <td th:text="${ur.rank}"></td>
+            <td th:text="${ur.username}"></td>
+            <td th:text="${ur.credit}"></td>
+            <!--<td th:text="${ur.coin}"></td>-->
         </tbody>
 
             <!--<td><a th:href="@{/editCategory(id=${c.id})}">编辑</a></td>-->
@@ -89,10 +84,10 @@
     <br/>
     <div>
             <a th:href="@{/}">返回主页 </a>
-			<a th:href="@{/listAction(start=0)}">[首  页]</a>
-			<a th:href="@{/listAction(start=${userActionPage.pageNum-1})}">[上一页]</a>
-			<a th:href="@{/listAction(start=${userActionPage.pageNum+1})}">[下一页]</a>
-			<a th:href="@{/listAction(start=${userActionPage.pages})}">[末  页]</a>
+			<a th:href="@{/userRank(start=0)}">[首  页]</a>
+			<a th:href="@{/userRank(start=${userRankPage.pageNum-1})}">[上一页]</a>
+			<a th:href="@{/userRank(start=${userRankPage.pageNum+1})}">[下一页]</a>
+			<a th:href="@{/userRank(start=${userRankPage.pages})}">[末  页]</a>
     </div>
     <br/>
 

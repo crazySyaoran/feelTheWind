@@ -1,29 +1,270 @@
 <!DOCTYPE html>
 <html lang="zh_CN"  xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
     <title>index</title>
+    <!-- Bootstrap core CSS -->
+    <link href="webjars/bootstrap/4.0.0/css/bootstrap.css" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <!--<link href="../asserts/css/signin.css" th:href="@{/asserts/css/signin.css}" rel="stylesheet">-->
+
+    <script src="webjars/jquery/3.5.0/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!--<script th:href="@{/webjars/bootstrap/4.0.0/js/bootstrap.js}"></script>-->
+
 </head>
 
-<body>
-    <h1>INDEX</h1>
-    <p>欢迎回来,
-        <font style="color:deeppink" th:if="${user.usertype}=='admin'">管理员 </font>
-        <a th:href="@{/listAction}"><font style="color:blue">[[${session.loginUser}]]</font></a>
-        <a th:href="@{/logout}">[登出]</a>。  积分：
-        <font style="color:green">[[${user.credit}]]</font>
+<body class="bg-light">
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+    <!--<a class="navbar-brand mr-auto mr-lg-0" href="#">Feel the Wind</a>-->
+    <!--<button class="navbar-toggler p-0 border-3" type="button" data-toggle="offcanvas">-->
+        <!--<span class="navbar-toggler-icon"></span>-->
+    <!--</button>-->
 
-        <font style="color:red" th:if="${session.actionMsg=='success'}">    [打卡成功！] </font>
-    </p>
+    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto" >
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/}">首页<span class="sr-only">(current)</span></a>
+            </li>
 
-    <!--<form class="form-signin" action="login.html" th:action="@{/logout}">-->
-        <!--<button type="submit">log out</button>-->
-    <!--</form>-->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+                    我要打卡
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" th:href="@{/meal}">恰饭</a>
+                    <a class="dropdown-item" th:href="@{/getup}">起床</a>
+                    <a class="dropdown-item" th:href="@{/sleep}">睡觉</a>
+                    <!--<div class="dropdown-divider"></div>-->
+                </div>
+            </li>
 
-    <a th:href="@{/meal}">恰饭</a>
-    <a th:href="@{/sleep}">睡觉</a>
-    <a th:href="@{/getup}">起床</a>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/listAction}">打卡记录</a>
+            </li>
+            <!--<li class="nav-item dropdown">-->
+                <!--<a class="nav-link dropdown-toggle" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">-->
+                    <!--我的账号-->
+                <!--</a>-->
+                <!--<div class="dropdown-menu" aria-labelledby="dropdown01">-->
+                    <!--<a class="dropdown-item "><small>还需[[${credit_left}]]活力升级</small></a>-->
+                    <!--<div class="dropdown-divider"></div>-->
+                    <!--<a class="dropdown-item" href="#">修改密码</a>-->
+                <!--</div>-->
+            <!--</li>-->
+            <li class="nav-item">
+                <a class="nav-link">我的账号</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/logout}">登出</a>
+            </li>
 
+            <li class="nav-item">
+                <a class="nav-link">
+                    好友
+                    <span class="badge badge-pill bg-light text-dark align-text-bottom">27</span>
+                </a>
+            </li>
+
+        </ul>
+
+        <!--<form class="form-inline my-2 my-lg-0">-->
+            <!--<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">-->
+            <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+        <!--</form>-->
+
+    </div>
+</nav>
+
+<main role="main" class="container" style="margin-top: 70px;">
+    <!--<div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded shadow-sm">-->
+        <!--&lt;!&ndash;<img class="mr-3" src="./Offcanvas template · Bootstrap_files/bootstrap-outline.svg" alt="" width="48" height="48">&ndash;&gt;-->
+        <!--<div class="lh-100">-->
+            <!--<h6 class="mb-0 text-white lh-100">Bootstrap</h6>-->
+            <!--<small>Since 2011</small>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <font class="d-block">欢迎回来,
+            <font style="color:deeppink" th:if="${user.usertype}=='admin'">♔</font>
+            <font style="color: red;">[Lv.</font><font style="color: red">[[${level}]]</font><font style="color: red">]</font>
+            <font>[[${session.loginUser}]]</font>。
+            你现在拥有︎<font style="color: green"><strong>♥︎[[${user.getCredit()}]]</strong></font>点活力，距离升级还需
+            <font style="color: green"><strong>♥︎︎[[${credit_left}]]</strong></font>点活力值。你的金币余额：
+            <font style="color:gold; margin-right: 10px"><strong>$[[${user.coin}]]</strong></font>
+            <font style="color:red" th:if="${session.actionMsg=='success'}"> [打卡成功！] </font>
+            <font style="color:red" th:if="${session.actionMsg=='alreadyMealed'}"> [你已经吃过这顿饭了哦~] </font>
+        </font>
+    </div>
+
+    <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <h6 class="border-bottom border-gray pb-2 mb-0">TOP玩家</h6>
+
+        <div class="media text-muted pt-3">
+            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32">
+                <title>Placeholder</title>
+                <!--<rect x="0" y="12" height="15" width="10"></rect>-->
+                <!--<rect x="10" y="5" height="22" width="12"></rect>-->
+                <!--<rect x="22" y="15" height="12" width="10"></rect>-->
+                <g>
+                    <title>background</title>
+                    <rect x="-1" y="-1" width="3.99998" height="3.99998" id="canvas_background" fill="none"></rect>
+                </g>
+                <g>
+                    <title>Layer 1</title>
+                    <rect stroke="#000" fill="#000" stroke-width="1.5" x="0.06252" y="16.09083" width="10.3124" height="11.18738" id="svg_1"></rect>
+                    <rect stroke="#000" fill="#000" stroke-width="1.5" x="20.93699" y="16.34082" width="10.3124" height="10.93739" id="svg_2"></rect>
+                    <rect stroke="#000" fill="#000" stroke-width="1.5" x="10.49975" y="8.65352" width="10.3124" height="18.6247" id="svg_3"></rect>
+                    <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="8" id="svg_9" y="15.71583" x="13.09382" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#ffffff">1</text>
+                    <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="8" id="svg_10" y="24.52811" x="24.46854" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#ffffff">3</text>
+                    <text style="cursor: move;" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="8" id="svg_11" y="24.34061" x="2.3441" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#ffffff">2</text>
+                </g>
+            </svg>
+            <!--<img src="img/podium.jpg" height="32" width="32"/>-->
+
+            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                <strong class="d-block"><font style="color:gold; margin-right: 7px">1st</font><font style="color: black"> [[${topUsers.get(0).username}]] </font></strong>
+                <font class="d-block"><font style="color:silver; margin-right: 2px">2nd</font><font style="color: black"> [[${topUsers.get(1).username}]]</font></font>
+                <font class="d-block"><font style="color:saddlebrown; margin-right: 4px">3rd</font><font style="color: black"> [[${topUsers.get(2).username}]]</font></font>
+            </p>
+        </div>
+
+        <small class="d-block text-right mt-3">
+            <a th:href="@{/userRank}">全站排名</a>
+        </small>
+    </div>
+
+    <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <h6 class="border-bottom border-gray pb-2 mb-0">置顶帖</h6>
+
+        <div class="media text-muted pt-3">
+            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32">
+                <!--<title>Placeholder</title>-->
+                <!--<rect width="100%" height="100%" fill="#007bff"></rect>-->
+                <!--<text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text>-->
+                <g>
+                    <title>background</title>
+                    <rect fill="none" id="canvas_background" height="34" width="34" y="-1" x="-1"/>
+                </g>
+                <g>
+                    <title>Layer 1</title>
+                    <path id="svg_2" d="m2.58394,13.02149l10.16989,0l3.14257,-10.21759l3.14258,10.21759l10.16989,0l-8.2276,6.31475l3.14274,10.21759l-8.2276,-6.31492l-8.2276,6.31492l3.14274,-10.21759l-8.2276,-6.31475z" stroke-opacity="null" stroke-width="1.5" stroke="#000" fill="#ffff00"/>
+                </g>
+            </svg>
+            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                <strong class="d-block text-gray-dark"><a th:href="@{/post/help}">欢迎来到FeeltheWind</a></strong>
+                每一个不曾起舞的日子，都是对生命的辜负。
+            </p>
+        </div>
+
+        <div class="media text-muted pt-3">
+            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32">
+                <g>
+                    <title>background</title>
+                    <rect x="-1" y="-1" width="4" height="4" id="canvas_background" fill="none"></rect>
+                </g>
+                <g>
+                    <title>Layer 1</title>
+                    <path stroke="#000" id="svg_3" d="m14.62821,12.34195c-0.04843,-0.0713 -0.10851,-0.14119 -0.18512,
+                    -0.19481c-0.32779,-0.23379 -0.79036,-0.16248 -1.03068,0.16019c-0.23991,0.32344 -0.16408,0.77551
+                    0.16447,1.00995c0.29852,0.21173 0.69688,0.16096 0.95107,-0.08813l-6.97477,9.41123l-2.16836,
+                    7.70384l6.80808,-4.40942l15.50436,-20.92042l-4.64159,-3.29508l-1.49625,2.01913c-0.0856,-0.33589 -0.27672,
+                    -0.65124 -0.58648,-0.87324c-0.71868,-0.51005 -1.72342,-0.35576 -2.2442,0.3491c-2.98426,4.02953 -1.32991,
+                    5.10259 -4.10054,9.12765l0,0zm-3.41455,12.59613l-3.50203,2.26831l1.11515,-3.96619l2.38687,1.69788l0,0zm4.12533,
+                    -12.80119c2.14844,-3.10694 1.9438,-3.94939 3.78249,-6.70712c0.30416,0.20431 0.65334,0.27637 0.99613,0.25869l-4.77862,
+                    6.44843l0,0z" fill-opacity="null" stroke-opacity="null" stroke-width="0.8" fill="#000000"></path>
+                </g>
+            </svg>
+            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                <strong class="d-block text-gray-dark"><a th:href="@{/post/help}">玩法说明</a></strong>
+                V1.0版本功能详解
+            </p>
+        </div>
+
+        <div class="media text-muted pt-3">
+            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32">
+                <g>
+                    <title>background</title>
+                    <rect fill="none" id="canvas_background" height="4" width="4" y="-1" x="-1"></rect>
+                </g>
+                <g>
+                    <title>Layer 1</title>
+                    <path stroke="#000" id="svg_1" d="m29.29764,9.92519c-1.01102,1.3552 -5.36497,3.07409 -5.92653,
+                    3.07409l-4.77274,0c-0.79211,0 -1.98503,0.18758 -2.54659,0.61763c0.06451,0.06891 0.12902,0.13782
+                    0.19142,0.208c0.43148,0.48364 1.44039,1.16507 2.33296,1.16507c0.41985,0 0.76461,-0.14675 1.05755,
+                    -0.45173c1.2458,-1.28502 1.89302,-1.4356 2.26845,-1.4356c0.44523,0 0.82806,0.24628 1.05332,
+                    0.6776c0.42302,0.79883 0.1121,1.84395 -0.20517,2.66319c-0.75932,1.94476 -3.234,4.04647 -5.91701,
+                    4.04647c-0.00212,0 -0.00212,0 -0.00423,0c-0.37437,0 -0.74134,-0.04211 -1.09245,-0.12633l0,4.14856c0,
+                    0.94686 1.09245,3.23233 4.40682,3.23233s4.18262,-4.7228 4.18262,-5.53567l0,-5.7577c2.35834,-1.49175
+                    4.77168,-2.30334 5.92653,-4.97036c1.08611,-2.50624 0.05499,-2.91075 -0.95497,-1.55555zm-7.41345,
+                    6.03079c0.84181,-2.16807 -0.05605,-2.16807 -1.62863,-0.54234s-3.87593,0.13399 -4.66169,
+                    -0.74651c-0.78576,-0.87922 -1.57152,-1.55683 -2.97595,-1.48919c-1.40443,0.06763 -4.71669,-0.20545
+                    -6.62769,-0.74651c-1.90888,-0.54234 -5.17672,-3.82826 -5.4464,-2.97966c-0.28131,0.8805 0.22314,
+                    1.49047 1.23522,2.97966c1.00996,1.49175 5.36708,3.54497 5.36708,3.54497s0,4.40633 0,6.23496c0,
+                    1.83118 3.14411,4.60667 4.77168,4.60667s2.86385,-1.3552 2.86385,-2.30461l0,-5.7577c2.6957,1.6972
+                    6.26071,-0.63039 7.10253,-2.79974zm-1.69208,-4.83765c1.84437,0 3.34081,-1.80439 3.34081,-4.02988c0,
+                    -2.22677 -1.49644,-4.03116 -3.34081,-4.03116s-3.33975,1.80439 -3.33975,4.03116c0,2.2255 1.49538,
+                    4.02988 3.33975,4.02988zm-8.80201,0c1.84437,0 3.33975,-1.80439 3.33975,-4.02988c0,-2.22677 -1.49538,
+                    -4.03116 -3.33975,-4.03116c-1.84543,0 -3.34081,1.80439 -3.34081,4.03116c0,2.2255 1.49432,4.02988
+                    3.34081,4.02988z" fill-opacity="null" stroke-opacity="null" stroke-width="0.8" fill="#000000"></path>
+                </g>
+            </svg>
+            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                <strong class="d-block text-gray-dark">招募同伴</strong>
+                我们还有很多值得去完成的事情！加入我们，成为这个社区的开发者！
+            </p>
+        </div>
+
+        <small class="d-block text-right mt-3">
+            <a href="#">查看更多</a>
+        </small>
+    </div>
+
+    <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <h6 class="border-bottom border-gray pb-2 mb-0">好友推荐</h6>
+
+        <div class="media text-muted pt-3">
+            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+            <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                <div class="d-flex justify-content-between align-items-center w-100">
+                    <strong class="text-gray-dark">Full Name</strong>
+                    <a href="https://getbootstrap.com/docs/4.4/examples/offcanvas/#">Follow</a>
+                </div>
+                <span class="d-block">@username</span>
+            </div>
+        </div>
+        <div class="media text-muted pt-3">
+            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+            <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                <div class="d-flex justify-content-between align-items-center w-100">
+                    <strong class="text-gray-dark">Full Name</strong>
+                    <a href="https://getbootstrap.com/docs/4.4/examples/offcanvas/#">Follow</a>
+                </div>
+                <span class="d-block">@username</span>
+            </div>
+        </div>
+        <div class="media text-muted pt-3">
+            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+            <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                <div class="d-flex justify-content-between align-items-center w-100">
+                    <strong class="text-gray-dark">Full Name</strong>
+                    <a href="https://getbootstrap.com/docs/4.4/examples/offcanvas/#">Follow</a>
+                </div>
+                <span class="d-block">@username</span>
+            </div>
+        </div>
+
+        <small class="d-block text-right mt-3">
+            <a href="https://getbootstrap.com/docs/4.4/examples/offcanvas/#">查看更多</a>
+        </small>
+    </div>
+
+</main>
 
 </body>
+
 </html>

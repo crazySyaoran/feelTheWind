@@ -27,6 +27,12 @@ public class UserAction {
         this.actiondetail = actiondetail;
     }
 
+    public UserAction(String username, String actionname, String actiontime) {
+        this.username = username;
+        this.actionname = actionname;
+        this.actiontime = actiontime;
+    }
+
     public int getActionid() {
         return actionid;
     }

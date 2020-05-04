@@ -1,11 +1,13 @@
 package com.example.restservice.pojo;
 
 public class User {
+    private int rank;
     private String username;
     private String password;
     private String usertype;
     private int credit;
     private String email;
+    private int coin;
 
     public String getUsername() {
         return username;
@@ -31,6 +33,14 @@ public class User {
         this.credit = credit;
     }
 
+    public int getCoin() {
+        return coin;
+    }
+
+    public void setCoin(int coin) {
+        this.coin = coin;
+    }
+
     public User(String username, String usertype, int credit){
         super();
         this.username = username;
@@ -47,6 +57,7 @@ public class User {
 
     public User(String username, String password, String usertype, int credit) {
         this.username = username;
+
         this.password = password;
         this.usertype = usertype;
         this.credit = credit;
@@ -60,6 +71,29 @@ public class User {
         this.email = email;
     }
 
+    public User(String username, String password, String usertype, java.lang.Integer credit, String email,
+                java.lang.Integer coin) {
+        this.username = username;
+        this.password = password;
+        this.usertype = usertype;
+        this.credit = credit;
+        this.email = email;
+        this.coin = coin;
+    }
+
+    public User(String username, String usertype, java.lang.Integer credit, java.lang.Integer coin) {
+        this.username = username;
+        this.usertype = usertype;
+        this.credit = credit;
+        this.coin = coin;
+    }
+
+    public User(String username, java.lang.Integer credit, java.lang.Integer coin) {
+        this.username = username;
+        this.credit = credit;
+        this.coin = coin;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -70,6 +104,14 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 
     public void setEmail(String email) {

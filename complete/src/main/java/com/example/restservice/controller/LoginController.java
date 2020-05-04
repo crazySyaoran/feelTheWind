@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.Null;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -61,10 +62,17 @@ public class LoginController {
     public String index(HttpSession session, Model m){
 //        System.out.print(session.getAttribute("loginUser").toString());
         User user = userMapper.getUser(session.getAttribute("loginUser").toString());
-//        System.out.println(user.getUsername()+user.getUsertype()+user.getCredit());
-
+//        System.out.println(user.getUsername()+user.getUsertype()+user.getCredit()+user.getCoin());
         session.setAttribute("user",userMapper.getUser(session.getAttribute("loginUser").toString()));
         m.addAttribute("user", user);
+        int level = 1 + (int)(Math.log(user.getCredit()+1) / Math.log(2));
+        int credit_left = (2 << (level-1)) - 1 - user.getCredit();
+        m.addAttribute("level", level);
+        m.addAttribute("credit_left", credit_left);
+
+        // 要注意 如果不满k个这里会炸
+        List<User> topUsers = userMapper.getTopKUsers(3);
+        m.addAttribute("topUsers", topUsers);
 
         return "index";
     }
@@ -81,5 +89,9 @@ public class LoginController {
         return "redirect:/";
     }
 
+    @GetMapping("/post/help")
+    public String posttemp(HttpSession session){
+        return "post/help";
+    }
 
 }

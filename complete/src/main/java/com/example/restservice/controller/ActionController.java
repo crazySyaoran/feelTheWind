@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class ActionController {
@@ -39,20 +40,37 @@ public class ActionController {
 
     @RequestMapping(value="/meal")
     public String mealAction(HttpSession session) throws Exception{
-//        System.out.println(session.getAttribute("loginUser"));
-//        return "redirect:index";
-//        System.out.print((new SimpleDateFormat("yyyyMMddhhmmss")).format(new Date()));
+
         Date date = new Date();
         int hournow = Integer.parseInt((new SimpleDateFormat("HH")).format(date));
-        String mealtype = hournow<10?"breakfast" : hournow>15?"supper" : "lunch";
+        int minutenow = Integer.parseInt((new SimpleDateFormat("mm")).format(date));
+        float timenow = hournow + (float)minutenow/60f;
 
-        UserAction meal = new UserAction(session.getAttribute("loginUser").toString(),
-                mealtype,(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(date),
-                1,"");
+        String mealtype = timenow<10.5?"breakfast" : timenow>15.5?"supper" : "lunch";
+        int addend = 0;
 
-        actionMapper.save(meal);
-        session.setAttribute("actionMsg", "success");
+        // ----9:00----10:00----10:30----11:15----14:00----15:30----18:30----
+        //   3       2        1   |    1        2        1   |    2        1
 
+        if ("breakfast".equals(mealtype)) {
+            addend = timenow<9?3 : timenow>10?1 : 2;
+        }else if ("lunch".equals(mealtype)) {
+            addend = timenow<11.25?1 : timenow>14?1 : 2;
+        }else {
+            addend = timenow<18.5?2 : 1;
+        }
+
+        UserAction actedUA = new UserAction(session.getAttribute("loginUser").toString(), mealtype, "2020-05-04");
+        List<String> actionid = actionMapper.actedAction(actedUA);
+        if (actionid.size() == 0) {
+            UserAction meal = new UserAction(session.getAttribute("loginUser").toString(),
+                    mealtype,(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(date),
+                    addend,"");
+            actionMapper.save(meal);
+            session.setAttribute("actionMsg", "success");
+        } else {
+            session.setAttribute("actionMsg", "alreadyMealed");
+        }
         return "redirect:/index";
     }
 
