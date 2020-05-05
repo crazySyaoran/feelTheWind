@@ -90,8 +90,13 @@ public class LoginController {
     }
 
     @GetMapping("/post/help")
-    public String posttemp(HttpSession session){
+    public String postHelp(HttpSession session){
         return "post/help";
+    }
+
+    @GetMapping("/post/joinUs")
+    public String postJoinUs(HttpSession session){
+        return "post/joinUs";
     }
 
 }

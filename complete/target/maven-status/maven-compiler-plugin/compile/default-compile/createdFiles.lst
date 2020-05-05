@@ -4,7 +4,6 @@ com/example/restservice/controller/LoginController.class
 com/example/restservice/pojo/User.class
 com/example/restservice/RestServiceApplication.class
 com/example/restservice/mapper/PasswordMapper.class
-com/example/restservice/controller/SecurityController.class
 com/example/restservice/controller/SignupController.class
 com/example/restservice/mapper/ActionMapper.class
 com/example/restservice/component/LoginHandlerInterceptor.class

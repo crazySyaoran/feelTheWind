@@ -106,8 +106,10 @@ public class ActionController {
         if (timenow >= 19) {
             List<UserAction> actions = actionMapper.actedAction(actedSleepToday);
             Boolean flag = Boolean.TRUE;
+
             for (UserAction ua : actions) {
-                if (Integer.parseInt(ua.getActiontime().substring(12,14)) >= 19) {
+                String x = ua.getActiontime();
+                if (Integer.parseInt(ua.getActiontime().substring(11,13)) >= 19) {
                     flag = Boolean.FALSE;
                     break;
                 }
@@ -128,13 +130,13 @@ public class ActionController {
             List<UserAction> actionsYesterday = actionMapper.actedAction(actedSleepYesterday);
             Boolean flag = Boolean.TRUE;
             for (UserAction ua : actionsToday) {
-                if (Integer.parseInt(ua.getActiontime().substring(12,14)) <= 5) {
+                if (Integer.parseInt(ua.getActiontime().substring(11,13)) <= 5) {
                     flag = Boolean.FALSE;
                     break;
                 }
             }
             for (UserAction ua : actionsYesterday) {
-                if (Integer.parseInt(ua.getActiontime().substring(12,14)) >= 19) {
+                if (Integer.parseInt(ua.getActiontime().substring(11,13)) >= 19) {
                     flag = Boolean.FALSE;
                     break;
                 }

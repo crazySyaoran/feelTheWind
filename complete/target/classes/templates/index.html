@@ -26,8 +26,12 @@
 
     <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto" >
+            <!--<li class="nav-item active">-->
+                <!--<a class="nav-link" th:href="@{/}">首页<span class="sr-only">(current)</span></a>-->
+            <!--</li>-->
+
             <li class="nav-item active">
-                <a class="nav-link" th:href="@{/}">首页<span class="sr-only">(current)</span></a>
+                <a class="nav-link" th:href="@{/}">首页</a>
             </li>
 
             <li class="nav-item dropdown">
@@ -148,8 +152,8 @@
         <div class="media text-muted pt-3">
             <div th:replace="svgSheet :: svg_friend"></div>
             <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                <strong class="d-block text-gray-dark">招募同伴</strong>
-                我们还有很多值得去完成的事情！加入我们，成为这个社区的开发者！
+                <strong class="d-block text-gray-dark"><a th:href="@{/post/joinUs}">成为开发者</a></strong>
+                我们还有很多值得完成的事情！加入我们，成为这个社区的开发者！
             </p>
         </div>
 
