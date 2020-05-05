@@ -20,8 +20,11 @@ public interface ActionMapper {
     List<UserAction> getUserAction(String username);
 
 //    @Select("select actionid from action_ where actionname = #{actionname} and left(actiontime,10) = #{actiontime}")
-    @Select("select actionid from action_ where actionname = #{actionname} and left(actiontime,10) = #{actiontime} " +
+    @Select("select * from action_ where actionname = #{actionname} and left(actiontime,10) = #{actiontime} " +
             "and username = #{username}")
-    List<String> actedAction(UserAction actedUA);
+    List<UserAction> actedAction(UserAction actedUA);
+
+    @Update("update user_ SET credit=credit+#{creditchange} WHERE username=#{username}")
+    void addcredit(UserAction userAction);
 
 }

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.6">
+    <title>Blog Template · Bootstrap</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/blog/">
+
+    <!-- Favicons -->
+    <meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#563d7c">
+
+    <link href="asserts/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.css}" rel="stylesheet">
+    <script src="webjars/jquery/3.5.0/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div th:replace="index :: topbar"></div>
+
+<main role="main" class="container">
+
+    <div th:fragment="svg_pen">
+        <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32">
+            <g>
+                <title>background</title>
+                <rect x="-1" y="-1" width="4" height="4" id="canvas_background" fill="none"></rect>
+            </g>
+            <g>
+                <title>Layer 1</title>
+                <path stroke="#000" id="svg_3" d="m14.62821,12.34195c-0.04843,-0.0713 -0.10851,-0.14119 -0.18512,
+                    -0.19481c-0.32779,-0.23379 -0.79036,-0.16248 -1.03068,0.16019c-0.23991,0.32344 -0.16408,0.77551
+                    0.16447,1.00995c0.29852,0.21173 0.69688,0.16096 0.95107,-0.08813l-6.97477,9.41123l-2.16836,
+                    7.70384l6.80808,-4.40942l15.50436,-20.92042l-4.64159,-3.29508l-1.49625,2.01913c-0.0856,-0.33589 -0.27672,
+                    -0.65124 -0.58648,-0.87324c-0.71868,-0.51005 -1.72342,-0.35576 -2.2442,0.3491c-2.98426,4.02953 -1.32991,
+                    5.10259 -4.10054,9.12765l0,0zm-3.41455,12.59613l-3.50203,2.26831l1.11515,-3.96619l2.38687,1.69788l0,0zm4.12533,
+                    -12.80119c2.14844,-3.10694 1.9438,-3.94939 3.78249,-6.70712c0.30416,0.20431 0.65334,0.27637 0.99613,0.25869l-4.77862,
+                    6.44843l0,0z" fill-opacity="null" stroke-opacity="null" stroke-width="0.8" fill="#000000"></path>
+            </g>
+        </svg>
+    </div>
+
+    <div th:fragment="svg_star">
+        <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32">
+            <g>
+                <title>background</title>
+                <rect fill="none" id="canvas_background" height="34" width="34" y="-1" x="-1"></rect>
+            </g>
+            <g>
+                <title>Layer 1</title>
+                <path id="svg_2" d="m2.58394,13.02149l10.16989,0l3.14257,-10.21759l3.14258,10.21759l10.16989,0l-8.2276,
+                6.31475l3.14274,10.21759l-8.2276,-6.31492l-8.2276,6.31492l3.14274,-10.21759l-8.2276,-6.31475z"
+                      stroke-opacity="null" stroke-width="1.5" stroke="#000" fill="#ffff00"></path>
+            </g>
+        </svg>
+    </div>
+
+    <div th:fragment="svg_podium">
+        <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32">
+            <title>Placeholder</title>
+            <!--<rect x="0" y="12" height="15" width="10"></rect>-->
+            <!--<rect x="10" y="5" height="22" width="12"></rect>-->
+            <!--<rect x="22" y="15" height="12" width="10"></rect>-->
+            <g>
+                <title>background</title>
+                <rect x="-1" y="-1" width="3.99998" height="3.99998" id="canvas_background" fill="none"></rect>
+            </g>
+            <g>
+                <title>Layer 1</title>
+                <rect stroke="#000" fill="#000" stroke-width="1.5" x="0.06252" y="16.09083" width="10.3124" height="11.18738" id="svg_1"></rect>
+                <rect stroke="#000" fill="#000" stroke-width="1.5" x="20.93699" y="16.34082" width="10.3124" height="10.93739" id="svg_2"></rect>
+                <rect stroke="#000" fill="#000" stroke-width="1.5" x="10.49975" y="8.65352" width="10.3124" height="18.6247" id="svg_3"></rect>
+                <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="8" id="svg_9" y="15.71583" x="13.09382" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#ffffff">1</text>
+                    <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="8" id="svg_10" y="24.52811" x="24.46854" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#ffffff">3</text>
+                    <text style="cursor: move;" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="8" id="svg_11" y="24.34061" x="2.3441" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#ffffff">2</text>
+            </g>
+        </svg>
+    </div>
+
+    <div th:fragment="svg_friend">
+        <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32">
+            <g>
+                <title>background</title>
+                <rect fill="none" id="canvas_background" height="4" width="4" y="-1" x="-1"></rect>
+            </g>
+            <g>
+                <title>Layer 1</title>
+                <path stroke="#000" id="svg_1" d="m29.29764,9.92519c-1.01102,1.3552 -5.36497,3.07409 -5.92653,
+                    3.07409l-4.77274,0c-0.79211,0 -1.98503,0.18758 -2.54659,0.61763c0.06451,0.06891 0.12902,0.13782
+                    0.19142,0.208c0.43148,0.48364 1.44039,1.16507 2.33296,1.16507c0.41985,0 0.76461,-0.14675 1.05755,
+                    -0.45173c1.2458,-1.28502 1.89302,-1.4356 2.26845,-1.4356c0.44523,0 0.82806,0.24628 1.05332,
+                    0.6776c0.42302,0.79883 0.1121,1.84395 -0.20517,2.66319c-0.75932,1.94476 -3.234,4.04647 -5.91701,
+                    4.04647c-0.00212,0 -0.00212,0 -0.00423,0c-0.37437,0 -0.74134,-0.04211 -1.09245,-0.12633l0,4.14856c0,
+                    0.94686 1.09245,3.23233 4.40682,3.23233s4.18262,-4.7228 4.18262,-5.53567l0,-5.7577c2.35834,-1.49175
+                    4.77168,-2.30334 5.92653,-4.97036c1.08611,-2.50624 0.05499,-2.91075 -0.95497,-1.55555zm-7.41345,
+                    6.03079c0.84181,-2.16807 -0.05605,-2.16807 -1.62863,-0.54234s-3.87593,0.13399 -4.66169,
+                    -0.74651c-0.78576,-0.87922 -1.57152,-1.55683 -2.97595,-1.48919c-1.40443,0.06763 -4.71669,-0.20545
+                    -6.62769,-0.74651c-1.90888,-0.54234 -5.17672,-3.82826 -5.4464,-2.97966c-0.28131,0.8805 0.22314,
+                    1.49047 1.23522,2.97966c1.00996,1.49175 5.36708,3.54497 5.36708,3.54497s0,4.40633 0,6.23496c0,
+                    1.83118 3.14411,4.60667 4.77168,4.60667s2.86385,-1.3552 2.86385,-2.30461l0,-5.7577c2.6957,1.6972
+                    6.26071,-0.63039 7.10253,-2.79974zm-1.69208,-4.83765c1.84437,0 3.34081,-1.80439 3.34081,-4.02988c0,
+                    -2.22677 -1.49644,-4.03116 -3.34081,-4.03116s-3.33975,1.80439 -3.33975,4.03116c0,2.2255 1.49538,
+                    4.02988 3.33975,4.02988zm-8.80201,0c1.84437,0 3.33975,-1.80439 3.33975,-4.02988c0,-2.22677 -1.49538,
+                    -4.03116 -3.33975,-4.03116c-1.84543,0 -3.34081,1.80439 -3.34081,4.03116c0,2.2255 1.49432,4.02988
+                    3.34081,4.02988z" fill-opacity="null" stroke-opacity="null" stroke-width="0.8" fill="#000000"></path>
+            </g>
+        </svg>
+    </div>
+
+
+
+</main>
+
+
+
+</body>
+</html>

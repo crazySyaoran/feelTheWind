@@ -10,54 +10,7 @@
 </head>
 <body style="margin-top: 100px">
 
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-    <!--<a class="navbar-brand mr-auto mr-lg-0" href="#">Feel the Wind</a>-->
-    <!--<button class="navbar-toggler p-0 border-3" type="button" data-toggle="offcanvas">-->
-    <!--<span class="navbar-toggler-icon"></span>-->
-    <!--</button>-->
-
-    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto" >
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/}">首页</a>
-            </li>
-
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">我要打卡</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" th:href="@{/meal}">恰饭</a>
-                    <a class="dropdown-item" th:href="@{/getup}">起床</a>
-                    <a class="dropdown-item" th:href="@{/sleep}">睡觉</a>
-                    <!--<div class="dropdown-divider"></div>-->
-                </div>
-            </li>
-
-            <li class="nav-item active">
-                <a class="nav-link" th:href="@{/listAction}">打卡记录<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link">我的账号</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/logout}">登出</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link">
-                    好友
-                    <span class="badge badge-pill bg-light text-dark align-text-bottom">27</span>
-                </a>
-            </li>
-
-        </ul>
-
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-
-    </div>
-</nav>
+<div th:replace="index :: topbar"></div>
   
 <div style="width:500px;margin:20px auto;text-align: center">
     <table align='center' border='1' cellspacing='0' class="table table-striped" width="80%">

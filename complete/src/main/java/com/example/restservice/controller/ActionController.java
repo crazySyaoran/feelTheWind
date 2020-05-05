@@ -16,10 +16,7 @@ import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Map;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Controller
 public class ActionController {
@@ -45,6 +42,10 @@ public class ActionController {
         int hournow = Integer.parseInt((new SimpleDateFormat("HH")).format(date));
         int minutenow = Integer.parseInt((new SimpleDateFormat("mm")).format(date));
         float timenow = hournow + (float)minutenow/60f;
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(Calendar.DATE, -1);
+        Date yesterday = c.getTime();
 
         String mealtype = timenow<10.5?"breakfast" : timenow>15.5?"supper" : "lunch";
         int addend = 0;
@@ -60,14 +61,17 @@ public class ActionController {
             addend = timenow<18.5?2 : 1;
         }
 
-        UserAction actedUA = new UserAction(session.getAttribute("loginUser").toString(), mealtype, "2020-05-04");
-        List<String> actionid = actionMapper.actedAction(actedUA);
-        if (actionid.size() == 0) {
+        UserAction actedUA = new UserAction(session.getAttribute("loginUser").toString(), mealtype,
+                new SimpleDateFormat("yyyy-MM-dd").format(date));
+        List<UserAction> actions = actionMapper.actedAction(actedUA);
+        if (actions.size() == 0) {
             UserAction meal = new UserAction(session.getAttribute("loginUser").toString(),
                     mealtype,(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(date),
                     addend,"");
             actionMapper.save(meal);
+            actionMapper.addcredit(meal);
             session.setAttribute("actionMsg", "success");
+            session.setAttribute("actionAddend", "+" + addend);
         } else {
             session.setAttribute("actionMsg", "alreadyMealed");
         }
@@ -77,23 +81,113 @@ public class ActionController {
     @RequestMapping(value="/sleep")
     public String sleepAction(HttpSession session) throws Exception{
 
-        UserAction sleep = new UserAction(session.getAttribute("loginUser").toString(),
-                "sleep",(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date()),
-                -1,"");
-        actionMapper.save(sleep);
-        session.setAttribute("actionMsg", "success");
+        Date date = new Date();
+        int hournow = Integer.parseInt((new SimpleDateFormat("HH")).format(date));
+        int minutenow = Integer.parseInt((new SimpleDateFormat("mm")).format(date));
+        float timenow = hournow + (float)minutenow/60f;
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(Calendar.DATE, -1);
+        Date yesterday = c.getTime();
 
+        // 0:00前睡觉是2分 否则1分
+        int addend = timenow<5 ? 1 : 2;
+
+        UserAction actedSleepToday = new UserAction(session.getAttribute("loginUser").toString(), "sleep",
+                new SimpleDateFormat("yyyy-MM-dd").format(date));
+        UserAction actedSleepYesterday = new UserAction(session.getAttribute("loginUser").toString(), "sleep",
+                new SimpleDateFormat("yyyy-MM-dd").format(yesterday));
+
+        if (5 < timenow &&  timenow < 19) {
+            session.setAttribute("actionMsg", "fail_noInTime");
+            return "redirect:/index";
+        }
+
+        if (timenow >= 19) {
+            List<UserAction> actions = actionMapper.actedAction(actedSleepToday);
+            Boolean flag = Boolean.TRUE;
+            for (UserAction ua : actions) {
+                if (Integer.parseInt(ua.getActiontime().substring(12,14)) >= 19) {
+                    flag = Boolean.FALSE;
+                    break;
+                }
+            }
+            if (flag) {
+                UserAction sleep = new UserAction(session.getAttribute("loginUser").toString(),
+                        "sleep",(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date()),
+                        addend,"");
+                actionMapper.save(sleep);
+                actionMapper.addcredit(sleep);
+                session.setAttribute("actionMsg", "success");
+                session.setAttribute("actionAddend", "+" + addend);
+            } else {
+                session.setAttribute("actionMsg", "alreadySlept");
+            }
+        } else if (timenow <= 5) {
+            List<UserAction> actionsToday = actionMapper.actedAction(actedSleepToday);
+            List<UserAction> actionsYesterday = actionMapper.actedAction(actedSleepYesterday);
+            Boolean flag = Boolean.TRUE;
+            for (UserAction ua : actionsToday) {
+                if (Integer.parseInt(ua.getActiontime().substring(12,14)) <= 5) {
+                    flag = Boolean.FALSE;
+                    break;
+                }
+            }
+            for (UserAction ua : actionsYesterday) {
+                if (Integer.parseInt(ua.getActiontime().substring(12,14)) >= 19) {
+                    flag = Boolean.FALSE;
+                    break;
+                }
+            }
+            if (flag) {
+                UserAction sleep = new UserAction(session.getAttribute("loginUser").toString(),
+                        "sleep",(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date()),
+                        addend,"");
+                session.setAttribute("actionMsg", "success");
+                session.setAttribute("actionAddend", "+" + addend);
+                actionMapper.save(sleep);
+                actionMapper.addcredit(sleep);
+            } else {
+                session.setAttribute("actionMsg", "alreadySlept");
+            }
+        }
         return "redirect:/index";
     }
 
     @RequestMapping(value="/getup")
     public String getUpAction(HttpSession session) throws Exception{
 
-        UserAction getup = new UserAction(session.getAttribute("loginUser").toString(),
-                "getup",(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date()),
-                -1,"");
-        actionMapper.save(getup);
-        session.setAttribute("actionMsg", "success");
+        Date date = new Date();
+        int hournow = Integer.parseInt((new SimpleDateFormat("HH")).format(date));
+        int minutenow = Integer.parseInt((new SimpleDateFormat("mm")).format(date));
+        float timenow = hournow + (float)minutenow/60f;
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(Calendar.DATE, -1);
+        Date yesterday = c.getTime();
+
+        int addend =  timenow<8.5?3 : timenow>9.5?1 : 2;
+
+
+        if (timenow < 5 || 19 < timenow) {
+            session.setAttribute("actionMsg", "fail_noInTime");
+            return "redirect:/index";
+        }
+
+        UserAction actedUA = new UserAction(session.getAttribute("loginUser").toString(), "getup",
+                new SimpleDateFormat("yyyy-MM-dd").format(date));
+        List<UserAction> actions = actionMapper.actedAction(actedUA);
+        if (actions.size() == 0) {
+
+            UserAction getup = new UserAction(session.getAttribute("loginUser").toString(),
+                    "getup",(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date()),
+                    addend,"");
+            actionMapper.save(getup);
+            actionMapper.addcredit(getup);
+            session.setAttribute("actionMsg", "success");
+        } else {
+            session.setAttribute("actionMsg", "alreadyGotUp");
+        }
 
         return "redirect:/index";
     }
