@@ -27,4 +27,7 @@ public interface ActionMapper {
     @Update("update user_ SET credit=credit+#{creditchange} WHERE username=#{username}")
     void addcredit(UserAction userAction);
 
+    @Select("select username, actionname, actiontime from action_ order by actiontime desc limit 3")
+    List<UserAction> getRecentAction();
+
 }

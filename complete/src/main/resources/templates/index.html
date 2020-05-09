@@ -18,7 +18,8 @@
 </head>
 
 <body class="bg-light">
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" th:fragment="topbar">
+<!--<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" th:fragment="topbar">-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" th:fragment="topbar">
     <!--<a class="navbar-brand mr-auto mr-lg-0" href="#">Feel the Wind</a>-->
     <!--<button class="navbar-toggler p-0 border-3" type="button" data-toggle="offcanvas">-->
         <!--<span class="navbar-toggler-icon"></span>-->
@@ -83,7 +84,7 @@
     </div>
 </nav>
 
-<main role="main" class="container" style="margin-top: 70px;">
+<main role="main" class="container" >
     <!--<div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded shadow-sm">-->
         <!--&lt;!&ndash;<img class="mr-3" src="./Offcanvas template · Bootstrap_files/bootstrap-outline.svg" alt="" width="48" height="48">&ndash;&gt;-->
         <!--<div class="lh-100">-->
@@ -169,21 +170,15 @@
             <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
             <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                 <div class="d-flex justify-content-between align-items-center w-100">
-                    <strong class="text-gray-dark">05-05 15:13:20</strong>
+                    <strong class="text-gray-dark">[[${recentActions.get(0).getActiontime().substring(5)}]]</strong>
                 </div>
-                <span class="d-block"><font style="color: blue">@禽蛋</font>
-                        从梦乡中醒来，并觉得自己现在应该在第三层梦境。</span>
-            </div>
-        </div>
-        <div class="media text-muted pt-3">
-            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-            <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                <div class="d-flex justify-content-between align-items-center w-100">
-                    <strong class="text-gray-dark">05-05 13:01:10</strong>
-                    <!--<a href="https://getbootstrap.com/docs/4.4/examples/offcanvas/#">Follow</a>-->
-                </div>
-                <span class="d-block"><font style="color: blue">@蕾姆是我老婆</font>
-                    开始享用午餐，并表示今天的肉依然不够多。
+                <span class="d-block"><font style="color: blue">@[[${recentActions.get(0).getUsername()}]]</font>
+                    <font th:if="${recentActions.get(0).getActionname()=='breakfast'}">开始享用早餐</font>
+                    <font th:if="${recentActions.get(0).getActionname()=='lunch'}">开始享用午餐</font>
+                    <font th:if="${recentActions.get(0).getActionname()=='supper'}">开始享用晚餐</font>
+                    <font th:if="${recentActions.get(0).getActionname()=='getup'}">从梦乡中醒来</font>
+                    <font th:if="${recentActions.get(0).getActionname()=='sleep'}">准备睡觉了</font>
+                    [[${recentActions.get(0).getActiondetail()}]]
                 </span>
             </div>
         </div>
@@ -191,11 +186,33 @@
             <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
             <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                 <div class="d-flex justify-content-between align-items-center w-100">
-                    <strong class="text-gray-dark">05-05 11:58:12</strong>
+                    <strong class="text-gray-dark">[[${recentActions.get(1).getActiontime().substring(5)}]]</strong>
                     <!--<a href="https://getbootstrap.com/docs/4.4/examples/offcanvas/#">Follow</a>-->
                 </div>
-                <span class="d-block"><font style="color: blue">@TheGFW</font>
-                    开始享用午餐，同时打开了EDGvsRNG的比赛。
+                <span class="d-block"><font style="color: blue">@[[${recentActions.get(1).getUsername()}]]</font>
+                    <font th:if="${recentActions.get(1).getActionname()=='breakfast'}">开始享用早餐</font>
+                    <font th:if="${recentActions.get(1).getActionname()=='lunch'}">开始享用午餐</font>
+                    <font th:if="${recentActions.get(1).getActionname()=='supper'}">开始享用晚餐</font>
+                    <font th:if="${recentActions.get(1).getActionname()=='getup'}">从梦乡中醒来</font>
+                    <font th:if="${recentActions.get(1).getActionname()=='sleep'}">准备睡觉了</font>
+                    [[${recentActions.get(1).getActiondetail()}]]
+                </span>
+            </div>
+        </div>
+        <div class="media text-muted pt-3">
+            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+            <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                <div class="d-flex justify-content-between align-items-center w-100">
+                    <strong class="text-gray-dark">[[${recentActions.get(2).getActiontime().substring(5)}]]</strong>
+                    <!--<a href="https://getbootstrap.com/docs/4.4/examples/offcanvas/#">Follow</a>-->
+                </div>
+                <span class="d-block"><font style="color: blue">@[[${recentActions.get(2).getUsername()}]]</font>
+                    <font th:if="${recentActions.get(2).getActionname()=='breakfast'}">开始享用早餐</font>
+                    <font th:if="${recentActions.get(2).getActionname()=='lunch'}">开始享用午餐</font>
+                    <font th:if="${recentActions.get(2).getActionname()=='supper'}">开始享用晚餐</font>
+                    <font th:if="${recentActions.get(2).getActionname()=='getup'}">从梦乡中醒来</font>
+                    <font th:if="${recentActions.get(2).getActionname()=='sleep'}">准备睡觉了</font>
+                    [[${recentActions.get(2).getActiondetail()}]]
                 </span>
             </div>
         </div>

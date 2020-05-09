@@ -1,9 +1,11 @@
 package com.example.restservice.controller;
 
 
+import com.example.restservice.mapper.ActionMapper;
 import com.example.restservice.mapper.PasswordMapper;
 import com.example.restservice.mapper.UserMapper;
 import com.example.restservice.pojo.User;
+import com.example.restservice.pojo.UserAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -19,6 +21,7 @@ import java.util.Map;
 public class LoginController {
     @Autowired PasswordMapper passwordMapper;
     @Autowired UserMapper userMapper;
+    @Autowired ActionMapper actionMapper;
 
     @PostMapping(value = "/login")
     public String login(@RequestParam("username") String username,
@@ -73,6 +76,9 @@ public class LoginController {
         // 要注意 如果不满k个这里会炸
         List<User> topUsers = userMapper.getTopKUsers(3);
         m.addAttribute("topUsers", topUsers);
+
+        List<UserAction> recentActions = actionMapper.getRecentAction();
+        m.addAttribute("recentActions", recentActions);
 
         return "index";
     }

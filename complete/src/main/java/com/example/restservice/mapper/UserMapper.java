@@ -39,6 +39,12 @@ public interface UserMapper {
     List<String> randuser(int k);
 
     @Update("update user_ set credit=credit+1 where username=#{username}")
-    void aiAddCredit (String username);
+    void aiAddCredit_1 (String username);
+
+    @Update("update user_ set credit=credit+2 where username=#{username}")
+    void aiAddCredit_2 (String username);
+
+    @Update("update user_ set credit=credit+3 where username=#{username}")
+    void aiAddCredit_3 (String username);
 
 }
