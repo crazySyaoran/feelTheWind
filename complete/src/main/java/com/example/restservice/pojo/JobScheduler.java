@@ -17,7 +17,6 @@ public class JobScheduler {
     @Autowired ActionMapper actionMapper;
     public int userNum = 2;
 
-
     public void addAiAction(int userNum, String actionName, int creditChange) {
         // userNum是选几个AI进行动作；随机区间是当前时间往前的20分钟内
         List<String> randusers = userMapper.randuser(userNum);
